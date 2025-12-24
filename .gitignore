@@ -12,3 +12,17 @@ ENV/
 .env
 .DS_Store
 playwright-state/
+
+# Output directories
+output/
+test_output/
+logs/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

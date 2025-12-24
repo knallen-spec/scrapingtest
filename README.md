@@ -2,12 +2,17 @@
 
 A Python-based web scraper that extracts company information from Google Maps based on location and industry.
 
+**Available as both a Web App and Command-Line Tool!**
+
 ## Features
 
+- 🌐 **Web Interface**: User-friendly Streamlit web app with real-time editing
 - 🔍 Scrape companies from Google Maps by country, city/region, and industry
 - 📊 Extract: Company name, phone number, website, location, and industry
+- ✏️ Edit results in-browser before downloading
 - 💾 Export results to CSV format
 - 🤖 Headless browser automation using Playwright
+- ☁️ Deploy to cloud platforms (Streamlit Cloud, Railway, Render)
 - 📝 Detailed logging and error handling
 - ⚙️ Customizable result limits
 
@@ -31,8 +36,32 @@ playwright install chromium
 
 ## Usage
 
-### Basic Usage
+### 🌐 Web Interface (Recommended)
 
+The easiest way to use the scraper is through the web interface:
+
+```bash
+streamlit run app.py
+```
+
+Then open your browser to `http://localhost:8501`
+
+**Features:**
+- Fill in search parameters through an intuitive form
+- Real-time progress updates
+- Edit results directly in the browser
+- Download as CSV with one click
+- View scraping history
+
+**☁️ Deploy to Cloud**: See [DEPLOYMENT.md](DEPLOYMENT.md) for instructions on deploying to Streamlit Cloud, Railway, Render, or Heroku.
+
+---
+
+### 💻 Command Line Interface
+
+For automated scripts or advanced users:
+
+**Basic Usage:**
 ```bash
 python main.py --country "USA" --city "New York" --industry "restaurants"
 ```
@@ -119,13 +148,23 @@ python main.py --country "Canada" --city "Toronto" --industry "dentists" --outpu
 
 ```
 scrapingtest/
-├── main.py              # Main entry point
-├── scraper.py           # Google Maps scraper logic
-├── csv_exporter.py      # CSV export functionality
-├── requirements.txt     # Python dependencies
-├── README.md           # Documentation
-├── output/             # CSV output files (created automatically)
-└── logs/               # Log files (created automatically)
+├── app.py                   # Streamlit web interface (NEW!)
+├── main.py                  # Command-line interface
+├── scraper.py               # Google Maps scraper logic
+├── csv_exporter.py          # CSV export functionality
+├── test_scraper.py          # Test suite
+├── requirements.txt         # Python dependencies
+├── packages.txt             # System dependencies for cloud
+├── runtime.txt              # Python version for deployment
+├── Procfile                 # Deployment configuration
+├── README.md                # Main documentation
+├── DEPLOYMENT.md            # Cloud deployment guide (NEW!)
+├── QUICKSTART.md            # Quick start guide
+├── .streamlit/              # Streamlit configuration
+│   ├── config.toml          # UI theme and settings
+│   └── setup.sh             # Deployment setup script
+├── output/                  # CSV output files (auto-created)
+└── logs/                    # Log files (auto-created)
 ```
 
 ## Troubleshooting
