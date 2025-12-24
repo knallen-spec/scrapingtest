@@ -9,6 +9,24 @@ import asyncio
 from datetime import datetime
 import os
 import io
+import sys
+import subprocess
+
+# Install Playwright browsers on first run
+@st.cache_resource
+def setup_playwright():
+    """Install Playwright browsers if not already installed."""
+    try:
+        cache_dir = os.path.expanduser("~/.cache/ms-playwright")
+        if not os.path.exists(cache_dir) or not os.listdir(cache_dir):
+            with st.spinner("Installing browser (first time setup, takes 2-3 minutes)..."):
+                subprocess.check_call([sys.executable, "-m", "playwright", "install", "chromium"])
+                subprocess.check_call([sys.executable, "-m", "playwright", "install-deps", "chromium"])
+    except Exception as e:
+        st.warning(f"Browser setup: {e}")
+
+# Run setup
+setup_playwright()
 
 from scraper import scrape_companies
 from csv_exporter import CSVExporter
