@@ -20,10 +20,13 @@ def setup_playwright():
         cache_dir = os.path.expanduser("~/.cache/ms-playwright")
         if not os.path.exists(cache_dir) or not os.listdir(cache_dir):
             with st.spinner("Installing browser (first time setup, takes 2-3 minutes)..."):
-                subprocess.check_call([sys.executable, "-m", "playwright", "install", "chromium"])
-                subprocess.check_call([sys.executable, "-m", "playwright", "install-deps", "chromium"])
+                subprocess.check_call([sys.executable, "-m", "playwright", "install", "chromium", "--with-deps"])
+                return True
+        return True
     except Exception as e:
-        st.warning(f"Browser setup: {e}")
+        st.error(f"Could not install browser: {e}")
+        st.info("System dependencies are installed via packages-apt.txt")
+        return False
 
 # Run setup
 setup_playwright()
